@@ -114,7 +114,7 @@ void Encryption (struct CipherText * CT,struct PublicKey *PK, struct MasterSecer
 	element_t gamma;
 	Zr(gamma,pairing);
 	element_from_hash(gamma,M,sizeof(M));
-//	element_printf("M in encryption\n%B",M);
+	//	element_printf("M in encryption\n%B",M);
 
 	Zr(CT->sigma,pairing);
 	element_from_hash(CT->sigma,CT->C,sizeof(element_t));
@@ -206,9 +206,9 @@ void Decrypt(struct UserPrivateKey * sk, struct PartialDecryptionCiphertext * CT
 	element_t M;
 	GT(M,pairing);
 	element_pow_zn(M,Tmp_hat,L_invert);
-/**************************************************************************
-	element_printf("Tmp_hat_L-1 = %B\n",M);
-****************************************************************************/
+	/**************************************************************************
+		element_printf("Tmp_hat_L-1 = %B\n",M);
+	****************************************************************************/
 	element_mul(M,M,CTp->C);
 
 	element_t gamma_;
@@ -224,7 +224,7 @@ void Decrypt(struct UserPrivateKey * sk, struct PartialDecryptionCiphertext * CT
 		puts("Succeed decryption");
 	else
 		puts("decryption failed!");
-//	element_printf("M in decryption\n%B\n",M);
+	//	element_printf("M in decryption\n%B\n",M);
 }
 
 
@@ -261,20 +261,20 @@ int main(){
 	else
 		puts("This is a asymmetric group");
 
-//	t gt_test;
-//	GT(gt_test,pairing);
+	//	t gt_test;
+	//	GT(gt_test,pairing);
 
 	struct PublicKey PK;
 	struct MasterSecertKey msk;
 	SystemInitiaion(&PK,&msk,pairing);
 
-//	Zr(msk.alpha,pairing);
-//	element_printf("msk.alpha= %B\n",msk.alpha);
-//	element_printf("PK.eg1h_alpha= %B\n",PK.eg1h_alpha);
+	//	Zr(msk.alpha,pairing);
+	//	element_printf("msk.alpha= %B\n",msk.alpha);
+	//	element_printf("PK.eg1h_alpha= %B\n",PK.eg1h_alpha);
 
-//	element_pairing(gt_test,PK.g1,msk.h_);
-//	element_pow_zn(gt_test,gt_test,msk.alpha);
-//	element_printf("gt_test= %B\n",gt_test);
+	//	element_pairing(gt_test,PK.g1,msk.h_);
+	//	element_pow_zn(gt_test,gt_test,msk.alpha);
+	//	element_printf("gt_test= %B\n",gt_test);
 
 	struct UserPrivateKey skW_;
 	KeyGen(&skW_, &PK, &msk, pairing);
@@ -289,7 +289,7 @@ int main(){
 	element_div(fortest,CT.C,fortest);
 	element_invert(fortest,fortest);
 	element_printf("fortest= %B\n",fortest);
-************************************************************************/
+	************************************************************************/
 
 	struct TransformationKey TK;
 	TransformationKeyGeneration(&TK, &skW_, pairing);
@@ -300,15 +300,15 @@ int main(){
 	Decrypt(&skW_, &CTp, pairing);
 
 
-/*********************************	
-	printf("sizeof element_t %d\n",sizeof(element_t));
-	printf("sizeof CTp %d\n",sizeof(CTp));
-	printf("sizeof CTp-C %d\n",sizeof(CTp.C));
-	printf("sizeof CTp-C %d\n",sizeof(CTp.Tmp));
-	printf("sizeof CTp-C %d\n",sizeof(CTp.C_));
-	printf("sizeof CTp-C %d\n",sizeof(CTp.sigma));
-	element_printf("CTpsigma= %B\n",CTp.Tmp);
-*************************************/
+	/*********************************	
+		printf("sizeof element_t %d\n",sizeof(element_t));
+		printf("sizeof CTp %d\n",sizeof(CTp));
+		printf("sizeof CTp-C %d\n",sizeof(CTp.C));
+		printf("sizeof CTp-C %d\n",sizeof(CTp.Tmp));
+		printf("sizeof CTp-C %d\n",sizeof(CTp.C_));
+		printf("sizeof CTp-C %d\n",sizeof(CTp.sigma));
+		element_printf("CTpsigma= %B\n",CTp.Tmp);
+	*************************************/
 	return 0;
 }
 
