@@ -1,6 +1,6 @@
-Source = jianhong-zhang.c src/pbc_inshort.c 
+Source = src/pbc_inshort.c jianhong-zhang.c 
 Target = out
-Object = jianhong-zhang.o pbc_inshort.o
+Object = pbc_inshort.o jianhong-zhang.o
 
 DIR_I = /usr/local/include/pbc
 DIR_L = /usr/local/lib
@@ -11,7 +11,7 @@ $(Target):$(Object)
 	@echo "Succeed!"
 
 .c.o:
-	gcc -c $(Source)
+	gcc -c $(Source) $(FLAG)
 clean:
 	rm $(Target)
 	rm $(Object)
