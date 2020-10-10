@@ -5,8 +5,10 @@ void helloworld(){
 
 void init_pairing(pairing_t pairing){
 	char param[2048];
+	char filedir[] = "param/a.param";
+	printf("param :%s\n",filedir);
 	FILE * fp;
-	fp = fopen("param/d159.param","r");
+	fp = fopen(filedir,"r");
 	size_t count = fread(param,1,2048,fp);
 	if (!count) pbc_die("input error");
 	fclose(fp);
